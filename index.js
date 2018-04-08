@@ -38,7 +38,8 @@ module.exports = {
     while (typeof app.import !== 'function' && app.app) {
       app = app.app;
     }
-    app.import('vendor/framework7/custom/js/framework7.custom.js');
+    app.import('./../node_modules/framework7/dist/framework7.esm.bundle.js');
+    app.import('./../node_modules/framework7/dist/framework7.less');
     app.import('vendor/framework7/plugins/toast/toast.js');
     app.import('vendor/framework7/plugins/toast/toast.css');
     app.import('vendor/wxjssdk/jweixin-1.1.0.js');
