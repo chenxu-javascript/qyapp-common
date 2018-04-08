@@ -1,0 +1,24 @@
+  <div class="page-content pt0 pb0">
+
+    <div class="report-detail">
+      <div class="scan-comment pt10">
+          <div class="comment hairline-bottom">
+            {{#each visitors as |item|}}
+              <div class="media flex">
+                <a class="comment-left" href="#">
+                  <img src={{item.user_face}}>
+                </a>
+                <div class="comment-body flex-item">
+                  <a class="comment-name text-noneline">{{item.user_name}}</a>
+                  <span class="fr mr5">{{moment-from-now item.timestamp interval=60000}}</span>
+                  <div class="mt5">{{item.dept}}</div>
+                </div>
+              </div>
+            {{else}}
+              {{block-holder text="暂无数据"}}
+            {{/each}}
+          </div>
+      </div>
+    </div>
+
+  </div>

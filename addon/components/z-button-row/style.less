@@ -1,0 +1,41 @@
+& {
+  position: relative;
+  .hairline(top, #ccc);
+  .hairline(bottom, #ccc);
+}
+> .z-row-btn.button {
+  &.button-big {
+    font-size: 14px;
+  }
+  &, &.active-state {
+    border-radius: 0 !important;
+    border: none;
+    background: #fff;
+    color: #b0b0b0;
+  }
+
+  &.active,&.active-state{
+    background: #fff;
+    color: #333;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: auto;
+    bottom: 0;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background-color: #e4e4e4;
+    display: block;
+    z-index: 15;
+    transform-origin: 50% 100%;
+    transform: scaleX(0.5);
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+}

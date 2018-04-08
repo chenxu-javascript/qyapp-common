@@ -1,0 +1,41 @@
+{{#if containerId}}
+  {{#ember-wormhole to=containerId}}
+    {{!#click-outside action=(action "cancel")}}
+      <div class="fade-overlay"></div>
+      <div class="{{selfCls}}">
+        <div class="toolbar">
+          <div class="toolbar-inner">
+            <a {{action 'cancel'}}>取消</a>
+            <span>{{moment-format value displayFormat}}</span>
+            <a {{action 'confirm'}}>确认</a>
+          </div>
+        </div>
+        <div class="toolbar date-legend">
+          <div class="picker-modal-inner picker-items">
+              {{#each headers as |item index|}}
+                {{#if index}}
+                  <div class="picker-items-col picker-items-col-divider">　</div>
+                {{/if}}
+                <div class="picker-items-col">
+                  <div class="picker-item">{{{item}}}</div>
+                </div>
+              {{/each}}
+          </div>
+        </div>
+        <div class="picker-modal-inner">
+          <div id={{pickerId}}>
+          </div>
+        </div>
+        <div class="toolbar date-legend">
+          <div class="toolbar-inner hairline-top">
+              <a class="link w100p justify-content-center" {{action "setToNow"}}>
+                {{nowText}}
+              </a>
+          </div>
+        </div>
+      </div>
+    {{!/click-outside}}
+  {{/ember-wormhole}}
+
+  {{yield this}}
+{{/if}}

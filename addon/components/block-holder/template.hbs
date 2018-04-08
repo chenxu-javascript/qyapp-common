@@ -1,0 +1,9 @@
+<span class="all-center">
+{{#if hasBlock}}
+    {{yield}}
+{{else if text}}
+    {{{text}}}
+{{else}}
+    <span class="preloader"></span>
+{{/if}}
+</span>

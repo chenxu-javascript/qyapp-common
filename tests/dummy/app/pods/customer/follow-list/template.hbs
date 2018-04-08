@@ -1,0 +1,56 @@
+<div class="{{if model.list 'bubble-list' 'list-block'}}">
+
+  {{#if model.list}}
+
+      {{#if next_follow_time}}
+        <div class="bubble-start bubble-item">
+          <div class="card">
+            <div class="card-header {{if is_follow_timeout 'text-orange'}}">
+              下次跟进时间: {{moment-format next_follow_time "YYYY-MM-DD HH:mm:ss"}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
+
+      {{#each model.list as |item|}}
+        {{#if item.showGroup}}
+          <div class="bubble-group bubble-item">
+            <div class="card">
+              <div class="group-title">{{item.groupName}}</div>
+            </div>
+          </div>
+        {{/if}}
+        <div class="bubble-item">
+          <div class="card">
+            <div class="card-header">{{moment-format item.create_time 'HH:mm'}}</div>
+            <div class="card-content">
+              <div class="card-content-inner">
+                <strong>
+                  {{item.create_user_name}} <a class="button active-state">{{item.type}}</a>
+                </strong>
+                <section>
+                  {{item.remark}}
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+
+      {{#infinite-scroller on-load-more=(action 'loadMore') hasMore=hasMore trigger-at="95%"}}
+        {{z-load-indicator text="加载中..."}}
+      {{/infinite-scroller}}
+  {{else if isloading}}
+    <ul>
+      {{block-holder}}
+    </ul>
+  {{else}}
+    <ul>
+      {{block-holder text="暂无跟进记录"}}
+    </ul>
+  {{/if}}
+
+
+
+
+</div>

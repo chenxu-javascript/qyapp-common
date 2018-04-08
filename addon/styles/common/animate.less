@@ -1,0 +1,127 @@
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+.animated.duration100{animation-duration: 0.1s;}
+.animated.duration200{animation-duration: 0.2s;}
+.animated.duration300{animation-duration: 0.3s;}
+.animated.duration400{animation-duration: 0.4s;}
+.animated.duration500{animation-duration: 0.5s;}
+.animated.duration600{animation-duration: 0.6s;}
+.animated.duration700{animation-duration: 0.7s;}
+.animated.duration800{animation-duration: 0.8s;}
+.animated.duration900{animation-duration: 0.9s;}
+.animated.duration1000{animation-duration: 1s;}
+.animated.duration2000{animation-duration: 2s;}
+.animated.duration3000{animation-duration: 3s;}
+.animated.duration4000{animation-duration: 4s;}
+.animated.duration5000{animation-duration: 5s;}
+.animated.duration6000{animation-duration: 6s;}
+
+.animated.delay0{animation-delay: 0s;}
+.animated.delay100{animation-delay: 0.1s;}
+.animated.delay200{animation-delay: 0.2s;}
+.animated.delay300{animation-delay: 0.3s;}
+.animated.delay400{animation-delay: 0.4s;}
+.animated.delay500{animation-delay: 0.5s;}
+.animated.delay600{animation-delay: 0.6s;}
+.animated.delay700{animation-delay: 0.7s;}
+.animated.delay800{animation-delay: 0.8s;}
+.animated.delay900{animation-delay: 0.9s;}
+.animated.delay1000{animation-delay: 1s;}
+.animated.delay1100{animation-delay: 1.1s;}
+.animated.delay1200{animation-delay: 1.2s;}
+.animated.delay1300{animation-delay: 1.3s;}
+.animated.delay1400{animation-delay: 1.4s;}
+.animated.delay1500{animation-delay: 1.5s;}
+.animated.delay1600{animation-delay: 1.6s;}
+.animated.delay1700{animation-delay: 1.7s;}
+.animated.delay1800{animation-delay: 1.8s;}
+.animated.delay1900{animation-delay: 1.9s;}
+.animated.delay2000{animation-delay: 2s;}
+.animated.delay2100{animation-delay: 2.1s;}
+.animated.delay2200{animation-delay: 2.2s;}
+.animated.delay2300{animation-delay: 2.3s;}
+.animated.delay2400{animation-delay: 2.4s;}
+.animated.delay2500{animation-delay: 2.5s;}
+.animated.delay2600{animation-delay: 2.6s;}
+.animated.delay2700{animation-delay: 2.7s;}
+.animated.delay2800{animation-delay: 2.8s;}
+.animated.delay2900{animation-delay: 2.9s;}
+.animated.delay3000{animation-delay: 3s;}
+.animated.delay4000{animation-delay: 4s;}
+.animated.delay5000{animation-delay: 5s;}
+.animated.delay6000{animation-delay: 6s;}
+.animated.delay7000{animation-delay: 7s;}
+.animated.delay8000{animation-delay: 8s;}
+.animated.delay9000{animation-delay: 9s;}
+.animated.delay10000{animation-delay: 10s;}
+.animated.delay20000{animation-delay: 20s;}
+.animated.delay30000{animation-delay: 30s;}
+
+.animated.animate-infinite{animation-iteration-count: infinite;}
+
+
+
+@keyframes pullIn {
+  0% {opacity: 0.2;transform: scale3d(2, 2, 2);}
+  30% {opacity: 0.5;transform: scale3d(1.8, 1.8, 1.8);}
+  100% {opacity: 1;transform: scale3d(1, 1, 1);}
+}
+@keyframes pullInBig {
+  0% {opacity: 0.0;transform: scale3d(5, 5, 5);}
+  40% {opacity: 0.2;transform: scale3d(4, 4, 4);}
+  100% {opacity: 1;transform: scale3d(1, 1, 1);}
+}
+
+.animated.pullIn {
+  animation-name: pullIn;
+}
+.animated.pullInBig {
+  animation-name: pullInBig;
+}
+
+@keyframes flipRollOut{
+  0% {opacity: 1;transform: perspective(400px) translate3d(0,0, 0) rotate3d(1, 0, 0, 0deg) scale3d(2, 2, 2);}
+  80% {opacity: 1;}
+  100% {opacity: 0;transform: perspective(400px) translate3d(0,200px, 0) rotate3d(1, 0, 0, 1560deg) scale3d(1, 1, 1);}
+}
+
+.animated.flipRollOut {
+  animation-name: flipRollOut;
+}
+
+
+@keyframes tadabig {
+	0%{transform:rotate(0)}
+	88%,92%,96%{transform:rotate(10deg)}
+	86%,90%,94%{transform:rotate(-10deg)}
+
+    80% {
+        transform:rotate(0deg)
+    }
+    100% {
+        transform:rotate(0)
+    }
+}
+
+.animated.tadabig {
+    animation-name: tadabig;
+}
+
+@keyframes tadainfinite {
+	0%{transform:rotate(0)}
+	24%,26.4%,28.8%{transform:rotate(5deg)}
+	22.8%,25.2%,27.6%{transform:rotate(-5deg)}
+
+  21.0% {
+      transform:rotate(0deg)
+  }
+  30.0% {
+      transform:rotate(0)
+  }
+}
+
+.animated.tadainfinite {
+    animation-name: tadainfinite;
+}

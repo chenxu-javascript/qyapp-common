@@ -1,0 +1,25 @@
+<div class="list-block nomargin">
+  <ul>
+    <li>
+      <a class="item-content {{itemCls}}">
+        <div class="item-inner">
+          <div class="item-title label">{{label}}</div>
+          <div class="item-input">
+            <input type="text" value={{value}} placeholder={{placeholder}} readOnly {{action 'triggerPicker'}}>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+{{#if showPicker}}
+  {{#z-date-picker
+    mode=mode
+    show=show
+    value=m
+    onConfirm=(action "datePicked")
+  as |picker|}}
+    {{set this 'picker' picker}}
+  {{/z-date-picker}}
+{{/if}}

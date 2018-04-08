@@ -1,0 +1,39 @@
+<div class="pages">
+  <div class="page navbar-through">
+
+    <div class="navbar">
+      <form class="searchbar searchbar-init {{if model.keyword 'searchbar-active'}}">
+           <div class="searchbar-input">
+               {{input type="search" placeholder="输入姓名 / 姓名拼音 / 手机号搜索" value=model.keyword enter="search"}}
+               <a href="#" class="searchbar-clear"></a>
+           </div>
+           <a href="javascript:;" class="searchbar-search" {{action "search"}}>搜索</a>
+       </form>
+    </div>
+    <div class="page-content">
+
+      <div class="list-block media-list mt0 list-noarrow">
+        <ul>
+          {{#each model.list as |item|}}
+            <li>
+              <a class="item-content item-link" {{action "showDetail" item}}>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">{{item.customer_name}}</div>
+                    <div class="item-after text-right">{{item.date}}<br />{{item.time}}</div>
+                  </div>
+                  <div class="item-subtitle">{{item.level_txt}}</div>
+                </div>
+              </a>
+            </li>
+          {{else if isloading}}
+            {{block-holder}}
+          {{else}}
+            {{block-holder text="暂无数据"}}
+          {{/each}}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>

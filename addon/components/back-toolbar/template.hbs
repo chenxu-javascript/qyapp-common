@@ -1,0 +1,9 @@
+<div class="toolbar-inner hairline-top">
+    <a href="#" class="link w100p justify-content-center" {{action "back"}}>
+      {{#if hasBlock}}
+        {{yield}}
+      {{else}}
+        {{text}}
+      {{/if}}
+    </a>
+</div>

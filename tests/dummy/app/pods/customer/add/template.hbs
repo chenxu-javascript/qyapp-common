@@ -1,0 +1,148 @@
+<div class="pages">
+  <div class="page toolbar-through">
+    <div class="page-content">
+
+
+      {{#if isloading}}
+        {{block-holder}}
+      {{else}}
+        <form class="form-customer-add pos-rel">
+          <div class="content-block-title">
+            基本信息
+          </div>
+
+          {{#z-form forView=isView as |f|}}
+            {{#f.item label="客户名称" }}
+              {{input placeholder="请输入客户名称（必填）" value=model.customer_name}}
+            {{/f.item}}
+            {{#f.item label="联系人" }}
+              {{input placeholder="请输入联系人姓名（必填）" value=model.contact}}
+            {{/f.item}}
+            {{#f.item label="联系电话" }}
+              {{input placeholder="请输入联系电话（必填）" value=model.phone}}
+            {{/f.item}}
+
+            {{#if (is-eq step 3)}}
+
+              {{#f.item label="关联用户ID" }}
+                {{input placeholder="请输入关联用户ID" value=model.user_id}}
+              {{/f.item}}
+
+              {{#f.item label="等级" isSmartSelect=true}}
+                {{#x-select value=model.level action=(action (mut model.level)) as |xs|}}
+                  {{#xs.option value=''}}{{if isView '' '请选择'}}{{/xs.option}}
+                  {{#each model.createParams.level.items as |item|}}
+                    {{#xs.option value=item.id}}{{item.name}}{{/xs.option}}
+                  {{/each}}
+                {{/x-select}}
+              {{/f.item}}
+
+              {{#f.item label="属性" isSmartSelect=true}}
+                {{#x-select value=model.qy_attr_id action=(action (mut model.qy_attr_id)) as |xs|}}
+                  {{#xs.option value=''}}{{if isView '' '请选择'}}{{/xs.option}}
+                  {{#each model.createParams.attr.items as |item|}}
+                    {{#xs.option value=item.id}}{{item.name}}{{/xs.option}}
+                  {{/each}}
+                {{/x-select}}
+              {{/f.item}}
+
+              {{#f.item label="企业状态" isSmartSelect=true}}
+                {{#x-select value=model.qy_state action=(action (mut model.qy_state)) as |xs|}}
+                  {{#xs.option value=''}}{{if isView '' '请选择'}}{{/xs.option}}
+                  {{#each model.createParams.qy_state.items as |item|}}
+                    {{#xs.option value=item.id}}{{item.name}}{{/xs.option}}
+                  {{/each}}
+                {{/x-select}}
+              {{/f.item}}
+
+              {{#f.item label="主营类目" }}
+                {{z-picker-input
+                  value=(concat model.category1_txt ' ' model.category2_txt ' ' model.category_txt)
+                  pickerName="z-category-picker"
+                  placeholder="请选择"
+                  onConfirm=(action "categoryPicked")
+                }}
+              {{/f.item}}
+
+            {{/if}}
+          {{/z-form}}
+
+          <div class="list-block nomargin">
+            {{#if (is-and tip (is-eq step 2))}}
+              <div class="list-block-label color-ff6900 text-center f12 mb0">{{tip}}</div>
+            {{/if}}
+          </div>
+
+          {{#if (is-eq step 3)}}
+            <div class="content-block-title">
+              其他信息
+            </div>
+
+            {{#z-form forView=isView as |f|}}
+
+              {{#f.item label="意向产品" }}
+                <input type="text" readonly="readonly" value={{model.product_txt}} placeholder="请选择" class="product-id" {{action 'openProductPicker'}} />
+              {{/f.item}}
+
+              {{#f.item label="地区"}}
+                {{z-picker-input
+                  value=(concat model.province_name ' ' model.city_name)
+                  placeholder="请选择"
+                  onConfirm=(action "cityPicked")}}
+              {{/f.item}}
+
+              {{#f.item label="地址" }}
+                {{input value=model.address placeholder="请填写详细地址"}}
+              {{/f.item}}
+
+              {{#f.item label="备注" }}
+                {{input value=model.remark placeholder="请填写"}}
+              {{/f.item}}
+
+              <input type="hidden" name="product_id" />
+
+            {{/z-form}}
+          {{/if}}
+          {{#if isView}}
+            <div class="view-backdrop"></div>
+          {{/if}}
+          </form>
+
+          {{#if (is-eq step 1)}}
+            <div class="content-block">
+              {{async-button tagName="a" class="button button-big button-fill" default="客户查重" pending="正在提交..." action=(action "submit")}}
+            </div>
+            {{else if (is-eq step 2)}}
+            <div class="content-block">
+              <a class="button button-big button-fill" {{action "next" 3}}>继续下一步</a>
+            </div>
+            <div class="content-block">
+              <a class="button button-big" {{action "goback"}}>返回</a>
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>
+      {{#if (is-eq step 3)}}
+        {{#bottom-bar renderInPlace=true}}
+          <div class="buttons-row">
+            {{#if customer_id}}
+              {{#if isView}}
+                <a class="button button-big button-fill button-flat" {{action "edit"}}>编 辑</a>
+              {{else}}
+                <a class="button button-big button-flat color-gray" {{action "cancel"}}>取消</a>
+                {{async-button class="button button-fill button-big button-flat" action=(action 'save') default="保存" pending="保存中..."}}
+              {{/if}}
+            {{else}}
+              <a class="button button-big button-flat color-gray" {{action "cancel"}}>取消</a>
+              {{async-button class="button button-fill button-big button-flat" action=(action 'save') default="保存" pending="保存中..."}}
+            {{/if}}
+          </div>
+        {{/bottom-bar}}
+      {{/if}}
+  </div>
+</div>
+
+
+{{#customer/add/picker-products items=model.products onComplete=(action "onComplete") onSelect=(action "onSelect") as |picker|}}
+  {{set this 'productsPicker' picker}}
+{{/customer/add/picker-products}}

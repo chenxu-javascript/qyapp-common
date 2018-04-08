@@ -1,0 +1,42 @@
+<div class="page">
+  <div class="page-content">
+
+    {{#z-form forView=isView class="nomargin" as |f|}}
+
+      {{#f.item label="姓名"}}
+        {{input readonly=isView placeholder="请输入姓名" value=changeset.contact_name}}
+      {{/f.item}}
+      {{#f.item label="手机"}}
+        {{input readonly=isView type="tel" placeholder="请输入手机" value=changeset.phone}}
+      {{/f.item}}
+      {{#f.item label="职位"}}
+        {{input readonly=isView placeholder="请输入职位" value=changeset.position}}
+      {{/f.item}}
+      {{#f.item label="座机"}}
+        {{input readonly=isView type="number" placeholder="请输入座机" value=changeset.contact_tel}}
+      {{/f.item}}
+      {{#f.item label="邮箱"}}
+        {{input readonly=isView type="email" placeholder="请输入邮箱" value=changeset.email}}
+      {{/f.item}}
+      {{#f.item label="Q Q"}}
+        {{input readonly=isView type="number" placeholder="请输入QQ" value=changeset.qq}}
+      {{/f.item}}
+      {{#f.item label="微信"}}
+        {{input readonly=isView placeholder="请输入微信" value=changeset.contact_weixin}}
+      {{/f.item}}
+
+    {{/z-form}}
+
+
+  </div>
+  {{#bottom-bar renderInPlace=true}}
+    {{#if isView}}
+      <a class="button button-big button-flat button-fill" {{action "edit"}}>编辑</a>
+    {{else}}
+      <div class="buttons-row">
+        <a class="button button-big button-flat color-gray" {{action "cancel"}}>取消</a>
+        {{async-button class="button button-fill button-big button-flat" action=(action 'save')  default="保存" pending="保存中..."}}
+      </div>
+    {{/if}}
+  {{/bottom-bar}}
+</div>

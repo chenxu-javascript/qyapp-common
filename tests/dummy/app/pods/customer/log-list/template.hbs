@@ -1,0 +1,32 @@
+<div class="list-block media-list">
+  <ul>
+    {{#each model.list as |item|}}
+      <li>
+        <div class="item-content">
+          <div class="item-media">
+            <img src={{item.user_face}}>
+          </div>
+          <div class="item-inner">
+            <div class="item-title-row">
+              <div class="item-title">
+                {{item.user_name}}
+                <span class="text-666">{{item.content}}</span>
+              </div>
+            </div>
+            <div class="item-subtitle">{{moment-format item.create_time "YYYY-MM-DD HH:mm:ss"}}</div>
+          </div>
+        </div>
+      </li>
+    {{else if isloading}}
+      {{block-holder}}
+    {{else}}
+      {{block-holder text="暂无日志"}}
+    {{/each}}
+
+    {{#if model.list}}
+      {{#infinite-scroller on-load-more=(action 'loadMore') hasMore=hasMore trigger-at="95%"}}
+        {{z-load-indicator text="加载中..."}}
+      {{/infinite-scroller}}
+    {{/if}}
+  </ul>
+</div>

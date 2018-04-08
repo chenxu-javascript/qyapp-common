@@ -1,0 +1,60 @@
+<ul>
+  {{#each depts as |dept|}}
+    <li>
+      <a class="item-content item-link {{if dept.is_item 'dept-item'}} {{if dept.selected 'active'}}" {{action "deptClick" dept}}>
+        <div class="item-inner">
+          <div class="item-title">
+            {{#if dept.isLoading}}
+              <i class="icon"><span class="preloader"></span></i>
+            {{else}}
+              <i class="icon {{if dept.has_children 'icon-arrow'}}"></i>
+            {{/if}}
+            {{get dept deptNameField}}
+          </div>
+          {{#unless dept.is_item}}
+              {{#if itemAfter}}
+                <div class="item-after">
+                  {{component itemAfter model=dept}}
+                </div>
+              {{else}}
+                <div class="item-after {{if showUserCount '' 'hidden'}}">
+                  {{dept.user_count}}
+                </div>
+              {{/if}}
+          {{/unless}}
+        </div>
+      </a>
+    </li>
+    {{#if dept.dataLoaded}}
+      <li class="{{if dept.selected '' 'hidden'}}">
+        {{dept-list
+          url=url
+          dept=dept
+          queryIdName=queryIdName
+          loadAllData=loadAllData
+          parentIdName=parentIdName
+          deptIdField=deptIdField
+          deptNameField=deptNameField
+          showSelfGroup=showSelfGroup
+          showSelfGroupField=showSelfGroupField
+          showUserCount=showUserCount
+          itemAfter=itemAfter
+          itemsUrl=itemsUrl
+          onDeptSelect=this.attrs.onDeptSelect
+        }}
+      </li>
+    {{/if}}
+  {{else if dept.isLoading}}
+    {{block-holder}}
+  {{else}}
+    <li>
+      <a class="item-content item-link text-gray">
+        <div class="item-inner">
+          <div class="item-title pl20">
+            无数据
+          </div>
+        </div>
+      </a>
+    </li>
+  {{/each}}
+</ul>

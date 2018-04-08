@@ -1,0 +1,11 @@
+<input type="text" class={{inputCls}} value={{value}} placeholder={{placeholder}} readOnly {{action 'triggerPicker'}}>
+
+{{#if showPicker}}
+  {{#z-date-picker
+    mode=mode
+    value=m
+    onConfirm=(action "datePicked")
+  as |picker|}}
+    {{set this 'picker' picker}}
+  {{/z-date-picker}}
+{{/if}}

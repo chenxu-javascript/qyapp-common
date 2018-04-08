@@ -1,0 +1,115 @@
+<div class="page cached {{selfCls}}" data-page="report-detail">
+
+  {{#top-bar renderInPlace=true}}
+    <div class="navbar-inner">
+      {{report.reportDateTitle}}
+    </div>
+  {{/top-bar}}
+
+  <div class="page-content">
+    <div class="report-detail">
+      <div class="report-content">
+        {{#if isLoading}}
+          {{block-holder}}
+        {{else}}
+          <div class="content-block-title">
+            <a>工作计划</a>
+          </div>
+          {{#if report.plan}}
+            <p class="detail-description" {{action "editPlan"}}>{{report.plan}}</p>
+          {{else if canEdit}}
+            <div class="list-block nomargin" {{action "editPlan"}}>
+              {{textarea class="edit-summary nopadding" readonly="readonly" placeholder="请填写工作计划"}}
+            </div>
+          {{else}}
+            <p class="detail-description">暂无计划</p>
+          {{/if}}
+
+          <div class="content-block-title">
+            <a>工作总结</a>
+          </div>
+          {{#if report.summary}}
+            <p class="detail-description" {{action "editSummary"}}>{{report.summary}}</p>
+          {{else if canEdit}}
+            <div class="list-block nomargin" {{action "editSummary"}}>
+              {{textarea class="edit-summary nopadding" readonly="readonly" placeholder="请填写工作总结"}}
+            </div>
+          {{else}}
+            <p class="detail-description">暂无总结</p>
+          {{/if}}
+        {{/if}}
+      </div>
+      <div class="scan-comment hairline-top">
+
+          {{#if visitors}}
+            <div class="pos-rel scan pb10 clearfix" {{action "gotoVisitorPage"}}>
+              <div class="scan-icon">
+                <i class="icon-eye f22 mt5"></i>
+              </div>
+
+              {{#each visitors as |item|}}
+                <div class="scan-item">
+                  <img src={{item.user_face}} alt={{item.user_name}}>
+                </div>
+              {{/each}}
+
+              <div class="fr mt5 mr20 f1_2">
+                <i class="icon-angle-right"></i>
+              </div>
+
+            </div>
+          {{/if}}
+
+          <div class="comment hairline-top">
+
+            {{#each comments as |item index|}}
+              <div class="media hairline-bottom">
+                <span class="comment-left" href="#">
+                  <i class="icon-comment f22 mt10 {{if index 'unvisible'}}"></i>
+                </span>
+                <div class="comment-body">
+                  <div class="flex">
+                    <img class="mt5" src={{item.user_face}}>
+                    <div class="flex-item ml10">
+                      <a class="comment-name text-noneline">{{item.user_name}}</a>
+                      <span class="fr mr5">{{moment-from-now item.timestamp interval=60000}}</span>
+                      <div class="mt5">{{item.content}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{else}}
+              <div class="media hairline-bottom ml0 nopadding">
+                {{block-holder text="暂无评论"}}
+              </div>
+            {{/each}}
+
+            {{#if comments}}
+              {{#infinite-scroller on-load-more=(action 'loadMore') hasMore=hasMore trigger-at="95%"}}
+                {{z-load-indicator text="加载中..."}}
+              {{/infinite-scroller}}
+            {{/if}}
+
+
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{#bottom-bar renderInPlace=true}}
+    <div class="toolbar messagebar" data-max-height="200">
+      <div class="toolbar-inner">
+        {{textarea placeholder="请输入评论信息" value=commentContent}}
+        <a href="#" class="link" {{action "pubComment"}}>发表</a>
+      </div>
+    </div>
+  {{/bottom-bar}}
+</div>
+
+{{jobreport/visitor-log report_id=report_id}}
+
+{{yield (hash
+  reload=(action "reload")
+  tabBar=this
+)}}

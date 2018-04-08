@@ -1,0 +1,23 @@
+{{#if containerId}}
+  {{#ember-wormhole to=containerId}}
+      <div class="fade-overlay"></div>
+      <div class="{{selfCls}}">
+        <div class="toolbar">
+          <div class="toolbar-inner">
+            <a {{action 'cancel'}}>取消</a>
+            <span> </span>
+            {{#if isloading}}
+              <a disabled>确认</a>
+            {{else}}
+              <a {{action 'confirm'}}>确认</a>
+            {{/if}}
+          </div>
+        </div>
+        <div class="picker-modal-inner">
+          <div id={{pickerId}}></div>
+        </div>
+      </div>
+  {{/ember-wormhole}}
+
+  {{yield this}}
+{{/if}}

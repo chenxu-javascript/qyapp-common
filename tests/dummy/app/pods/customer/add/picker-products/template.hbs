@@ -1,0 +1,57 @@
+{{#if containerId}}
+  {{#ember-wormhole to=containerId }}
+    <div class="picker-prod {{selfCls}}">
+      <div class="toolbar">
+        <div class="toolbar-inner nopadding">
+          {{#if showSearch}}
+            <form class="searchbar searchbar-init bg-white {{if keyword 'searchbar-active'}}">
+              <div class="searchbar-input">
+                {{input type="text" placeholder="请输入产品名称" value=keyword enter="search" class="bg-color-f2f2f2"}}
+                <a class="searchbar-clear"></a>
+              </div>
+              <a class="searchbar-search" {{action "search"}}>搜索</a>
+            </form>
+          {{else}}
+            <div class="left"></div>
+            <div class="center">意向感觉</div>
+            <div class="right" {{action "goSearch"}}>
+              <a href="#" class="link icon-only">
+                <i class="iconfont icon-search color-ff6700"></i>
+              </a>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+      <div class="picker-modal-inner">
+        <div class="list-block nomargin">
+          {{#if item2Show.length}}
+            <ul>
+              {{#each item2Show as |item|}}
+                <li class= {{if item.selected 'selected'}} {{action "select" item}}>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title">
+                        {{item.name}}
+                      </div>
+                      <div class="item-after">
+                        {{item.amount}}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              {{/each}}
+            </ul>
+          {{else}}
+            <div class="text-center tip-text">
+              没有查询到相关内容
+            </div>
+          {{/if}}
+        </div>
+      </div>
+      <div class="toolbar">
+        <a class="text-center button button-big button-fill noborderradius" {{action "ok"}}>确定</a>
+      </div>
+    </div>
+  {{/ember-wormhole}}
+  {{yield this}}
+{{/if}}

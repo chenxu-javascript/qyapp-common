@@ -1,0 +1,16 @@
+<div class="searchbar-input">
+    {{input type="search"
+      placeholder=placeholder
+      value=keyword
+      enter=(action search)
+      focus-in=(action onFocusIn)
+      focus-out=(action 'focusOut')
+    }}
+    <a href="javascript:;" class="searchbar-clear"></a>
+</div>
+{{#if autoSearch}}
+  <a href="javascript:;" class="searchbar-cancel">{{cancelText}}</a>
+{{else}}
+  <a href="javascript:;" class="searchbar-search" {{action 'search'}}>{{searchText}}</a>
+{{/if}}
+<div class="list-block list-block-search searchbar-found hidden"></div>

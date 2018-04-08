@@ -1,0 +1,47 @@
+{{dateFormat}}
+<div class="page navbar-fixed" data-page="index">
+  {{#top-bar renderInPlace=true tagName="" classNames="navbar"}}
+    {{#z-tab-bar as |bar|}}
+      {{#bar.item active=tabIsDay onActive=(action (mut tab) 'day')}}
+        日报
+      {{/bar.item}}
+      {{#bar.item active=tabIsWeek onActive=(action (mut tab) 'weekly')}}
+        周报
+      {{/bar.item}}
+      {{#bar.item active=tabIsMonth onActive=(action (mut tab) 'month')}}
+        月报
+      {{/bar.item}}
+    {{/z-tab-bar}}
+  {{/top-bar}}
+  <div class="page-content">
+
+    <div class="list-block dept-list nomargin">
+
+      {{#if showDept}}
+        {{z-date-picker-field
+          value=report_date_display
+          mode=dateMode
+          m=curMnt
+          format=format
+          onDateSelected=(action 'datePicked')
+        }}
+        {{dept-list
+          classNames="item-link-nobg"
+          dept=defaultDept
+          showSelfGroup=false
+          onDeptSelect=(action 'showDeptReport')
+          itemsUrl=userUrl
+          url=deptUrl
+          queryIdName='department_id'
+          deptIdField='department_id'
+          deptNameField='department_name'
+          itemAfter=(component "jobreport/statistic/list-after")
+        }}
+      {{else}}
+        {{block-holder}}
+      {{/if}}
+
+
+    </div>
+  </div>
+</div>

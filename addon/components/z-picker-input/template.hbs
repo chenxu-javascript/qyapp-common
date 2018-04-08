@@ -1,0 +1,7 @@
+<input type="text" class={{inputCls}} value={{value}} placeholder={{placeholder}} readOnly {{action 'triggerPicker'}}>
+
+{{#if showPicker}}
+  {{#component pickerName url=getAddrUrl onConfirm=(action "picked") as |picker|}}
+    {{set this 'picker' picker}}
+  {{/component}}
+{{/if}}

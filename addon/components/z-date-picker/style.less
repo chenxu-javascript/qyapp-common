@@ -1,0 +1,28 @@
+.picker-items {
+  font-size: 16px;
+}
+.picker-center-highlight {
+  box-shadow: 0 0 8px #ddd;
+  background: rgba(255, 255,255,0.4);
+}
+.picker-items {
+  -webkit-mask-box-image: none;
+}
+.picker-item {
+  min-width: 55px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+
+  &.picker-selected {
+    color: #000;
+  }
+}
+
+.toolbar.date-legend {
+  height: 36px;
+  .hairline(bottom, @gray);
+}
+.picker-items-col-divider{
+  opacity: 0.3;
+  transform: scaleX(0.5) scaleY(1.5);
+}

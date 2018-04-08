@@ -1,0 +1,45 @@
+<div class="page {{dataCache}}" data-page={{dataPage}}>
+
+  {{#if (is-eq type 'day')}}
+    {{jobreport/day-report showVisitor=showVisitor onSelect=(action "editReport")}}
+  {{else}}
+
+    <div class="page-content pt0">
+      {{#if showList}}
+        {{#if (is-eq type 'month')}}
+          {{jobreport/month-report onSelect=(action "editReport")}}
+        {{else if (is-eq type 'week')}}
+          {{jobreport/week-report onSelect=(action "editReport")}}
+        {{/if}}
+      {{/if}}
+    </div>
+
+  {{/if}}
+
+</div>
+
+{{jobreport/editor-report
+  report=report
+  type=type
+  report_date=report_date
+  report_id=report_id
+  onSaved=(action "saved")
+  onCancel=(action "cancel")
+}}
+{{jobreport/editor-report2
+  report=report
+  type=type
+  report_date=report_date
+  report_id=report_id
+  onSaved=(action "saved2")
+  onCancel=(action "cancel2")
+}}
+{{#jobreport/detail-report
+  report=report
+  create=create
+  create2=create2
+  canEdit=true
+  report_id=report_id
+  showVisitor=showVisitor as |detail|}}
+  {{set this 'detailComp' detail}}
+{{/jobreport/detail-report}}

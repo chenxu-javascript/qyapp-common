@@ -1,0 +1,58 @@
+
+<div class="page cached {{selfCls}}" data-page="report-list">
+  {{#top-bar}}
+    {{#z-tab-bar as |bar|}}
+      {{#bar.item active=tabIsDay onActive=(action (mut tab) 'day')}}
+        日报
+      {{/bar.item}}
+      {{#bar.item active=tabIsWeek onActive=(action (mut tab) 'weekly')}}
+        周报
+      {{/bar.item}}
+      {{#bar.item active=tabIsMonth onActive=(action (mut tab) 'month')}}
+        月报
+      {{/bar.item}}
+    {{/z-tab-bar}}
+  {{/top-bar}}
+  <div class="page-content">
+
+    <div class="list-block dept-list nomargin">
+
+      {{#if isLoading}}
+        {{block-holder}}
+      {{else if model.report_list}}
+
+        <div class="report-list">
+
+            {{#each model.report_list as |item|}}
+              <div class="report-item" {{action onSelect item}}>
+                <div class="card">
+                  <div class="card-header">{{item.reportDateTitle}}</div>
+                  <div class="card-content">
+                  <div class="card-content-inner">
+                    <strong>工作计划</strong>
+                    <p>{{default item.plan '暂无计划'}}</p>
+                    <strong>工作总结</strong>
+                    <p>{{default item.summary '暂无总结'}}</p>
+                  </div>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" class="link">查看详情</a>
+                    <a href="#" class="link"><i class="icon-angle-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+
+            {{#infinite-scroller on-load-more=(action 'loadMore') hasMore=hasMore trigger-at="95%"}}
+              {{z-load-indicator text="加载中..."}}
+            {{/infinite-scroller}}
+
+        </div>
+        {{else}}
+          {{block-holder text="暂无数据"}}
+        {{/if}}
+
+
+    </div>
+  </div>
+</div>

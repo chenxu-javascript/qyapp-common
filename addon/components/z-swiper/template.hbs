@@ -1,0 +1,10 @@
+
+<div class="swiper-wrapper">
+  {{yield (hash
+    item=(component 'z-swiper/item')
+  )}}
+</div>
+
+{{#if showPagination}}
+  <div class="swiper-pagination"></div>
+{{/if}}

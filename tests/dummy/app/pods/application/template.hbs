@@ -1,0 +1,15 @@
+<div class="statusbar-overlay"></div>
+<div class="panel-overlay"></div>
+
+<div class="views">
+  <div class="view view-main" id="main-view">
+    {{outlet name="main" class="main-outlet"}}
+    <div class="global-backdrop" {{action "closePops"}}></div>
+  </div>
+</div>
+
+<div class="picker-modal" id="picker-global"></div>
+{{!--
+<div class="popup popup-global" id="popup-global"></div>
+--}}
+<div class="panel panel-right panel-cover" id="panel-right-global"></div>

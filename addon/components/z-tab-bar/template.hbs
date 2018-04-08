@@ -1,0 +1,14 @@
+
+<div class="navbar-inner {{innerCls}}">
+  {{yield (hash
+    item=(component 'z-tab-bar/item')
+    tabBar=this
+  )}}
+  {{html-tag tagName=linkTagName class='link-follower'}}
+</div>
+  {{!--
+    <a class="tab-link {{if stateIs1 'active'}}" {{action 'changeState' 1}}>
+        <span class="tabbar-label number-label">{{model.summary.chanceCreate}}</span>
+        <span class="tabbar-label">{{tab1Text}}</span>
+    </a>
+  --}}

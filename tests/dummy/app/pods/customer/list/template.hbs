@@ -1,0 +1,127 @@
+<div class="pages navbar-through">
+  <div class="page page with-subnavbar">
+    {{#top-bar renderInPlace=true tagName="" wrapCls="navbar customer-navbar"}}
+      {{#z-tab-bar as |bar|}}
+        {{#if highsea}}
+          {{#bar.item active=(is-eq tab '6') onActive=(action (mut tab) '6')}}
+            小公海
+          {{/bar.item}}
+          {{#bar.item active=(is-eq tab '7') onActive=(action (mut tab) '7')}}
+            大公海
+          {{/bar.item}}
+          {{#bar.item active=(is-eq tab '5') onActive=(action (mut tab) '5')}}
+            金猪库
+          {{/bar.item}}
+        {{else}}
+          {{#bar.item active=(is-eq tab '2') onActive=(action (mut tab) '2')}}
+            待受理
+          {{/bar.item}}
+          {{#bar.item active=(is-eq tab '3') onActive=(action (mut tab) '3')}}
+            跟进中
+          {{/bar.item}}
+          {{#bar.item active=(is-eq tab '4') onActive=(action (mut tab) '4')}}
+            成交客户
+          {{/bar.item}}
+        {{/if}}
+        {{#bar.item activable=false class="button button-big button-fill btn-add-customer pt0"}}
+          {{#link-to 'customer.add'}}
+            <i class="icon-plus text-white"></i>
+          {{/link-to}}
+        {{/bar.item}}
+
+        <div class="subnavbar">
+            {{#z-button-row as |r|}}
+              {{#r.button active=true}}
+                {{#if queryVars.sort}}
+                  {{#z-smart-picker label="排序" pickcls="picker-customer"}}
+                    {{#x-select value=sort  action=(action (mut sort)) as |xs|}}
+                      {{#xs.option value=''}}请选择{{/xs.option}}
+                      {{#each queryVars.sort.data as |item|}}
+                        {{#xs.option value=item.id}}{{item.name}}{{/xs.option}}
+                      {{/each}}
+                    {{/x-select}}
+                  {{/z-smart-picker}}
+                {{else}}
+                  排序
+                {{/if}}
+              {{/r.button}}
+              {{#r.button}}<div data-panel="right" class="open-panel">筛选</div>{{/r.button}}
+              {{#r.button}} {{#link-to 'customer.search'}}<i class="icon-search"></i> {{/link-to}}{{/r.button}}
+            {{/z-button-row}}
+        </div>
+      {{/z-tab-bar}}
+
+    {{/top-bar}}
+
+    <div class="page-content customerlist-page-content">
+
+      <div class="list-block media-list list-noarrow mt0">
+        <ul>
+          {{#each list as |item|}}
+            <li>
+              <a class="item-content item-link" {{action "showDetail" item}}>
+                <div class="item-inner">
+                  <div class="item-title-row">
+
+                      <div class="item-title">{{item.customer_name}}</div>
+                      <div class="item-after text-right">
+                        {{#if highsea}}
+                          {{async-button class="button button-big text-center" action=(action 'claim' item)  default="认领"}}
+                        {{else}}
+                          {{#if (is-eq tab '2')}}
+                            {{item.date}}<br />{{item.time}}
+                          {{else}}
+                            {{item.text}}<br />　
+                          {{/if}}
+                        {{/if}}
+                      </div>
+
+                  </div>
+                  <div class="item-subtitle">
+                    {{#if (is-eq tab '4')}}
+                      {{item.date}} {{item.time}}
+                    {{else}}
+                      {{item.level_txt}}
+                    {{/if}}
+                  </div>
+                </div>
+              </a>
+            </li>
+          {{else if isloading}}
+            {{block-holder}}
+          {{else}}
+            {{block-holder text="暂无数据"}}
+          {{/each}}
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{{#ember-wormhole to="panel-right-global"}}
+  <div class="page">
+    <div class="page-content">
+      {{#each queryVars.filters as |item|}}
+        <div class="content-block" data-key={{item.key}}>
+          <p class="side-panel-title">{{item.name}}</p>
+          <div class="side-panel-content clearfix">
+            {{#each item.data as |data|}}
+              <div class="side-panel-label {{if data.active 'active'}}" {{action "toggleFilter" data}}>
+                {{data.name}}
+              </div>
+            {{else}}
+              {{block-holder class="minhauto" text="暂无数据"}}
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    {{#bottom-bar renderInPlace=true}}
+      <a class="button button-big button-flat button-fill close-panel" {{action "applyFilter"}}>
+        完 成
+      </a>
+    {{/bottom-bar}}
+  </div>
+{{/ember-wormhole}}

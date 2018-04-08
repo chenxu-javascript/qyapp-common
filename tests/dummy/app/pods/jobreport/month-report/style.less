@@ -1,0 +1,30 @@
+.z-cells {
+  .z-cell {
+    border: 1px solid @gray;
+    border-top-width: 0;
+    height: 120px;
+    border-left-width: 0;
+    padding: 20px;
+    &:first-child {
+      border-left-width: 1px;
+    }
+    p {
+      margin-top: 0;
+    }
+    .button {
+      font-size: 14px;
+      height: 35px;
+      line-height: 35px;
+      margin-top: 20px;
+      width: 1.5rem;
+    }
+  }
+  &:first-child .z-cell {
+    border-top-width: 1px;
+  }
+}
+
+.report-cell-wrap {
+  margin: 20px 0;
+  background: #fff;
+}

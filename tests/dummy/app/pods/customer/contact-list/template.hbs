@@ -1,0 +1,61 @@
+<div class="list-block media-list list-noarrow">
+  <ul>
+
+    {{#each model.list as |item|}}
+      <li>
+        <a class="item-content item-link">
+          <div class="item-inner" {{action "showContactDetail" item}}>
+            <div class="item-title-row">
+              <div class="item-title">{{item.contact_name}}</div>
+            </div>
+            <div class="item-subtitle">{{item.phone}}</div>
+          </div>
+          <div class="item-after">
+            <a href="tel:{{item.phone}}">
+              <i class="icon-dianhua"></i>
+            </a>
+            <a href="sms:{{item.phone}}">
+              <i class="icon-youxiang"></i>
+            </a>
+          </div>
+        </a>
+      </li>
+    {{else if isloading}}
+      {{block-holder}}
+    {{else}}
+      {{block-holder text="暂无联系人"}}
+    {{/each}}
+    {{#if model.list}}
+      {{#infinite-scroller on-load-more=(action 'loadMore') hasMore=hasMore trigger-at="95%"}}
+        {{z-load-indicator text="加载中..."}}
+      {{/infinite-scroller}}
+    {{/if}}
+    <li class="add-customer">
+      <a class="item-content item-link" {{action "addContact"}}>
+        <div class="item-inner">
+          <div class="item-title-row">
+              <div class="item-title">
+                添加联系人
+                <i class="icon-plus-circle"></i>
+              </div>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+{{#ember-wormhole to="appbody"}}
+  <div class="popup" id="customer-add-popup">
+    <div class="pages">
+      {{customer/contact-form
+        customer_id=customer_id
+        model=formModal
+        isView=isView
+        popup=popup
+        onContactSaved=(action "onContactSaved")
+      }}
+    </div>
+  </div>
+{{/ember-wormhole}}

@@ -1,0 +1,33 @@
+{{#top-bar renderInPlace=true}}
+  <div class="navbar-inner">
+      <div class="left">
+          <a class="link icon-only" {{action "prevYear"}}>
+              <i class="iconfont icon-angleleft f24"></i>
+          </a>
+      </div>
+      <div class="center">{{year}}</div>
+      <div class="right">
+          <a class="link icon-only" {{action "nextYear"}}>
+              <i class="iconfont icon-angle-right f22"></i>
+          </a>
+      </div>
+  </div>
+{{/top-bar}}
+
+
+<div class="report-cell-wrap">
+  {{#each monthData as |month|}}
+    <div class="row no-gutter z-cells">
+      {{#each month as |item|}}
+        <div class="col-33 z-cell" {{action onSelect item}}>
+          <p>{{item.month}}月</p>
+          {{#if (is-contains completedMonths item.report_date)}}
+            <a class="button button-outline">已创建</a>
+          {{else}}
+            <a class="button button-fill">创　建</a>
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</div>

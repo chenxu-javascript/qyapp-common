@@ -1,0 +1,30 @@
+    {{outlet}}
+    {{!jobreport/editor-report}}
+    {{!jobreport/detail-report}}
+    {{!jobreport/month-report}}
+    {{!jobreport/week-report}}
+    {{!jobreport/visitor-log}}
+    {{!jobreport/report-list}}
+
+{{!--
+    <div class="list-block dept-list nomargin">
+      {{#top-bar}}
+        {{#z-tab-bar as |bar|}}
+          {{#bar.item active=true onActive=(action (mut tab) 1)}}
+            日报
+          {{/bar.item}}
+          {{#bar.item onActive=(action (mut tab) 2)}}
+            周报
+          {{/bar.item}}
+          {{#bar.item onActive=(action (mut tab) 3)}}
+            月报
+          {{/bar.item}}
+        {{/z-tab-bar}}
+      {{/top-bar}}
+
+      {{z-date-picker-field}}
+
+
+      {{dept-list dept=defaultDept url='/department/GetDepartmentList'}}
+    </div>
+--}}

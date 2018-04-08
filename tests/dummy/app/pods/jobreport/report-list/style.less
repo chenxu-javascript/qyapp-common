@@ -1,0 +1,49 @@
+.report-list {
+  position: relative;
+  &:before {
+    content: ' ';
+    position: absolute;
+    width: 1px;
+    background: @themeColor;
+    top: 20px;
+    left: 30px;
+    bottom: 10px;
+  }
+}
+.report-item {
+  display: flex;
+  position: relative;
+  &:before {
+    content: ' ';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: @themeColor;
+    top: 19px;
+    left: 23px;
+  }
+}
+.card{
+  margin-left: 55px;
+  margin-right: 20px;
+  width: 100%;
+}
+.card-header {
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  background-color: @themeColor;
+  color: white;
+  position: relative;
+  flex: 1;
+  &:before {
+    content: '';
+    position: absolute;
+    height: 0;
+    width: 0;
+    border: 6px solid transparent;
+    border-right-color: @themeColor;
+    right: 100%;
+  }
+}

@@ -1,0 +1,108 @@
+<div class="pages toolbar-through">
+  <div class="page">
+    <div class="page-content">
+
+      <div class="content-block custom-detail inset">
+        <div class="content-block-inner">
+            <div class="list-block media-list list-noarrow">
+              {{#if model.customer_id}}
+                <ul>
+                  <li>
+                    <a class="item-content item-link" href="#/customer/add?customer_id={{model.customer_id}}">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                          <div class="item-title">{{model.customer_name}}</div>
+                          <div class="item-after">{{model.stage_txt}}</div>
+                        </div>
+                        <div class="item-subtitle text-orange">{{model.level_txt}}</div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              {{else}}
+                {{block-holder style="min-height: 50px;"}}
+              {{/if}}
+            </div>
+
+            <div class="row">
+                <div class="col-33">
+                  成交次数<section>{{model.deal_num}}次</section>
+                </div>
+                <div class="col-33">
+                  预计成交金额<section>{{model.exp_amount}}元</section>
+                </div>
+                <div class="col-33">
+                  实际成交金额<section>{{model.amount}}元</section>
+                </div>
+            </div>
+
+        </div>
+      </div>
+
+      {{#z-tab-bar as |bar|}}
+        {{#bar.item active=(is-eq tab 'follow') onActive=(action (mut tab) 'follow')}}
+          跟进记录
+        {{/bar.item}}
+        {{#bar.item active=(is-eq tab 'contact') onActive=(action (mut tab) 'contact')}}
+          联系人
+        {{/bar.item}}
+        {{#bar.item active=(is-eq tab 'order') onActive=(action (mut tab) 'order')}}
+          订单
+        {{/bar.item}}
+        {{#bar.item active=(is-eq tab 'log') onActive=(action (mut tab) 'log')}}
+          日志
+        {{/bar.item}}
+      {{/z-tab-bar}}
+
+      {{#if (is-eq tab 'follow')}}
+        {{customer/follow-list customer_id=customer_id
+          next_follow_time=model.next_follow_time
+          is_follow_timeout=model.is_follow_timeout
+        }}
+      {{/if}}
+      {{#if (is-eq tab 'contact')}}
+        {{customer/contact-list
+          customer_id=customer_id
+          popup=popup
+        }}
+      {{/if}}
+      {{#if (is-eq tab 'order')}}
+        {{customer/order-list customer_id=customer_id}}
+      {{/if}}
+      {{#if (is-eq tab 'log')}}
+        {{customer/log-list customer_id=customer_id}}
+      {{/if}}
+
+
+
+    </div>
+    {{#bottom-bar renderInPlace=true}}
+      <a class="link justify-content-center" {{action "showOps"}}>操作</a>
+    {{/bottom-bar}}
+  </div>
+</div>
+
+{{#if loadUserPopup}}
+  {{#ember-wormhole to="appbody"}}
+    <div class="popup" id="customer-transfer-popup">
+      <div class="pages navbar-through toolbar-through addressbook-page">
+        {{#user-list
+          url="/sell/membership-act-getuserlist"
+          cached=""
+          dataPage="index"
+          forSelect=true
+          kw=kw
+          onSelect=(action 'userSelected')
+        }}
+          <div class="toolbar h44">
+            <div class="toolbar-inner hairline-top">
+                <a class="link w100p justify-content-center" {{action "doTransfer"}}>
+                  确 定
+                </a>
+            </div>
+          </div>
+        {{/user-list}}
+      </div>
+    </div>
+  {{/ember-wormhole}}
+{{/if}}

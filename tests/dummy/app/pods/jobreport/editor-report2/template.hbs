@@ -1,0 +1,25 @@
+<div class="page cached {{selfCls}}" data-page="editor-report-next">
+
+  <div class="page-content pt0 pb0">
+
+    <div class="content-block-title">{{report.reportDateTitle}}工作总结</div>
+    {{#list-block}}
+      {{textarea class="edit-summary" placeholder="请填写工作总结" value=report.summary}}
+    {{/list-block}}
+
+    <div class="content-block-title">{{report.nextDateTitle}}工作计划</div>
+    {{#list-block}}
+      {{textarea class="edit-plan" placeholder="请填写工作计划" value=nextReport.plan}}
+    {{/list-block}}
+
+  </div>
+
+  {{#bottom-bar renderInPlace=true classNames="clearfix"}}
+    <div class="buttons-row">
+      <a href="#" class="button button-big button-flat color-gray" {{action "cancel"}}>取消</a>
+      {{async-button class="button active button-big button-flat" action=(action 'save')  default="保存" pending="保存中..."}}
+    </div>
+  {{/bottom-bar}}
+
+
+</div>

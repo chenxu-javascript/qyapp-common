@@ -1,0 +1,24 @@
+<div class="item-content {{contentCls}} {{smartCls}}" data-open-in={{openIn}} id={{contentId}}>
+  {{#if (is-and hasBlock isSmartSelect)}}
+    {{yield}}
+  {{/if}}
+  <div class="item-inner">
+    {{#if label}}
+      <div class="item-title label {{labelCls}}" >{{label}}{{#if hasicon}}<i  onclick={{action "showtiped"}} class="iconfont icon-14052218 open-about"></i>
+        {{/if}}
+      </div>
+      <span class="label-seperator">:</span>
+    {{/if}}
+    <div class="item-input {{inputCls}}">
+      {{#if hasBlock}}
+        {{#if isSmartSelect}}
+          <div class="item-after"></div>
+        {{else}}
+          {{yield}}
+        {{/if}}
+      {{else}}
+        {{input value=value}}
+      {{/if}}
+    </div>
+  </div>
+</div>

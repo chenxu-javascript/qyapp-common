@@ -1,0 +1,14 @@
+{{user-list
+  cached=""
+  dataPage="index"
+  group_id=group_id
+  onSelect=(action 'userSelect')
+}}
+
+{{jobreport/report-list user_id=user_id tab=type onSelect=(action 'showReport')}}
+
+{{jobreport/detail-report
+  report_id=report_id
+  user_id=user_id
+  type=type
+  showVisitor=showVisitor}}

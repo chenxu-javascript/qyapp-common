@@ -1,0 +1,22 @@
+
+{{!--
+  <div class="page-content pt0">
+    <div class="content-block-title">本日总结</div>
+    {{#list-block}}
+      {{textarea class="edit-summary" placeholder="请填写工作总结" value=report.summary}}
+    {{/list-block}}
+
+    <div class="content-block-title">下日计划</div>
+    {{#list-block}}
+      {{textarea class="edit-plan" placeholder="请填写工作计划" value=report.plan}}
+    {{/list-block}}
+
+  </div>
+
+  {{#bottom-bar renderInPlace=true classNames="clearfix bottom44"}}
+  <div class="buttons-row">
+    <a href="#" class="button button-big button-flat color-gray" {{action "cancel"}}>取消</a>
+    <a href="#" class="button active button-big button-flat" {{action "save"}}>保存</a>
+  </div>
+  {{/bottom-bar}}
+--}}

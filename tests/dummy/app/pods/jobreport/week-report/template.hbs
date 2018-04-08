@@ -1,0 +1,46 @@
+{{#top-bar renderInPlace=true}}
+  <div class="navbar-inner">
+      <div class="left">
+          <a class="link icon-only" {{action "prevMonth"}}>
+              <i class="iconfont icon-angleleft f24"></i>
+          </a>
+      </div>
+      <div class="center">{{date}}</div>
+      <div class="right">
+          <a class="link icon-only" {{action "nextMonth"}}>
+              <i class="iconfont icon-angle-right f22"></i>
+          </a>
+      </div>
+  </div>
+{{/top-bar}}
+
+
+<div class="list-block">
+  <ul>
+    {{#each weeks as |item|}}
+      <li class="item-content" {{action onSelect item}}>
+        <div class="item-inner">
+          <div class="item-title">
+            {{item.start}} ~ {{item.end}}
+          </div>
+          <div class="item-after">
+            <span class="item-weeknum">{{item.weekNum}}</span>
+            {{#if (is-contains completedWeeks item.start_full)}}
+              <a class="button button-outline">已创建</a>
+            {{else}}
+              <a class="button button-fill">创　建</a>
+            {{/if}}
+
+            {{!--#if item.loading}}
+              <a class="button button-outline">加载中</a>
+            {{else if item.report.report_id}}
+              <a class="button button-outline">已创建</a>
+            {{else}}
+              <a class="button button-fill">创　建</a>
+            {{/if--}}
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>

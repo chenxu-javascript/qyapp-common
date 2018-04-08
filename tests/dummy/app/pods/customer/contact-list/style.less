@@ -1,0 +1,40 @@
+.item-after {
+  color: @themeColor;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  max-height: none;
+  padding-top: 5px;
+
+  i {
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    border: 2px solid @themeColor;
+    text-align: center;
+
+    &:last-child {
+      position: relative;
+      top: 7px;
+    }
+  }
+}
+.item-subtitle {
+  color: #666;
+}
+
+.add-customer {
+  .item-content .item-title {
+    color: @themeColor;
+    line-height: 34px;
+  }
+  i {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+}
